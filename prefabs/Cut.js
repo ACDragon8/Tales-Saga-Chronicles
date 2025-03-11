@@ -8,11 +8,13 @@ class Cut extends Phaser.Physics.Arcade.Sprite {
 
         this.body.setSize(this.width / 4 * 3, this.height / 4 * 3)
         this.body.setImmovable(true)
-
-        scene.physics.add.collider(this, scene.slime, (cut, slime) => {
-            //slime.hp -= 1
-            console.log('slime damage') 
-        })
+        //for (let i = 0; i < scene.slimes.; i++) {
+            scene.physics.add.collider(this,scene.slimes, (cut, slime) => {
+                slime.hp -= 1
+                console.log('slime damage')
+                console.log(slime.hp) 
+            })
+        //}
 
         //exist temporarily
         scene.time.delayedCall(this.lifetime, () => {

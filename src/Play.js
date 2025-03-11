@@ -25,8 +25,25 @@ class Play extends Phaser.Scene {
         //spawn objects
         this.map = this.add.image(0,0,"map").setOrigin(0,0)
         this.player = new Player(this, 50, 50, 'hero')
-        this.slime = new Slime(this, 100, 100, 'slime')
-        this.slimes = []
+        this.slimes = this.add.group({classType: Slime, runChildUpdate: true})
+        this.slimeMax = 2
+        this.slimeCount = 0
+        this.spawnRate = 1000
+
+        this.spawn = this.time.addEvent({delay: this.spawnRate,
+            callback: () => {
+                if (this.slimeCount < this.slimeMax) {
+                    this.slimes.add(new Slime(this, 100, 100, 'slime'))
+                    this.slimeCount++
+                }
+            },
+            callbackScope: this,
+            args: null,
+            loop: true
+          })
+    
+
+        
 
         // set up camera
         this.cameras.main.setBounds(0,0,this.map.width, this.map.height)
@@ -39,6 +56,6 @@ class Play extends Phaser.Scene {
 
     update() {
         this.player.update()
-        this.slime.update()
+
     }
 }
