@@ -41,11 +41,27 @@ class Play extends Phaser.Scene {
         this.slimeMax = 2
         this.slimeCount = 0
         this.spawnRate = 1000
+        this.minSpawn = 50
+        this.spawnRange = 100
        
         this.spawn = this.time.addEvent({delay: this.spawnRate,
             callback: () => {
                 if (this.slimeCount < this.slimeMax) {
-                    let slime = new Slime(this, 100, 100, 'slime')
+                    let signX = Math.random()
+                    if (signX > 0.5) {
+                        signX = 1
+                    }
+                    else {
+                        signX = -1
+                    }
+                    let signY = Math.random()
+                    if (signY > 0.5) {
+                        signY = 1
+                    }
+                    else {
+                        signY = -1
+                    }
+                    let slime = new Slime(this, this.player.x +(signX * Math.random()*this.spawnRange) + (signX * this.minSpawn) , this.player.y +(signY * Math.random()*this.spawnRange) + signY * this.minSpawn, 'slime')
                     this.slimes.add(slime)
                     this.children.bringToTop(this.player)
                     this.slimeCount++

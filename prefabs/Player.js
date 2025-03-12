@@ -5,7 +5,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this)
 
         this.direction = 'down'
-        this.playerVelocity = 100
+        this.playerVelocity = 200
 
         this.hp = 1
 

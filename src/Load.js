@@ -50,6 +50,7 @@ class Load extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('player', { start: 12, end: 15 }),
         })
 
+        /*
         // hero animations (walking)
         this.anims.create({
             key: 'walk-down',
@@ -75,6 +76,7 @@ class Load extends Phaser.Scene {
             repeat: -1,
             frames: this.anims.generateFrameNumbers('hero', { start: 12, end: 15 }),
         })
+        */
 
         // hero animations (swinging)
         this.anims.create({
