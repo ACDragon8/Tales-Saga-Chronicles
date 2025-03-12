@@ -9,21 +9,53 @@ class Load extends Phaser.Scene {
             frameWidth: 32,
             frameHeight: 32,
         })
-        this.load.image('map', 'map-scroll.jpg')
+        this.load.spritesheet('player', 'player-sheet.png', {
+            frameWidth: 32,
+            frameHeight: 32,
+        })
+        this.load.image('map', 'map.png')
         this.load.image('slime', 'slime.png')
         this.load.image('bullet','bullet.png')
         this.load.image('cut','cut.png')
+        this.load.image('castle','Castle.png')
         this.load.audio('pixel-time','1-02. Pixel Time.mp3')
     }
 
     create() {
         //Using Scrolling State Sprites as placeholders
+
+        //player animations
+        this.anims.create({
+            key: 'walk-right',
+            frameRate: 8,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('player', { start: 0, end: 3 }),
+        })
+        this.anims.create({
+            key: 'walk-up',
+            frameRate: 8,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('player', { start: 4, end: 7 }),
+        })
+        this.anims.create({
+            key: 'walk-down',
+            frameRate: 8,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('player', { start: 8, end: 11 }),
+        })
+        this.anims.create({
+            key: 'walk-left',
+            frameRate: 8,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('player', { start: 12, end: 15 }),
+        })
+
         // hero animations (walking)
         this.anims.create({
             key: 'walk-down',
             frameRate: 8,
             repeat: -1,
-            frames: this.anims.generateFrameNumbers('hero', { start: 0, end: 3 }),
+            frames: this.anims.generateFrameNumbers('player', { start: 0, end: 3 }),
         })
         this.anims.create({
             key: 'walk-right',
