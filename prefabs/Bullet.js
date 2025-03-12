@@ -8,6 +8,7 @@ class Bullet extends Phaser.Physics.Arcade.Sprite {
         this.lifetime = 5000
 
         this.body.setSize(this.width / 8, this.height / 8)
+        this.body.setBounce(0)
 
         //points towards player and moves towards it
         this.direction = new Phaser.Math.Vector2(scene.player.x - x,scene.player.y - y)
@@ -15,9 +16,11 @@ class Bullet extends Phaser.Physics.Arcade.Sprite {
         this.setVelocity(this.speed * this.direction.x, this.speed * this.direction.y)
 
         //on hitting the player, log a hit
-        scene.physics.add.collider(this, scene.player, (bullet, player) => {
-            console.log('hit')
-            bullet.destroy()
+        scene.physics.add.overlap(this, scene.player, (bullet, player) => {
+            if (!player.isDashing) {
+                console.log('hit')
+                bullet.destroy()
+            }
         })
 
         //on hitting a cut, destroy self

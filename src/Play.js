@@ -31,6 +31,7 @@ class Play extends Phaser.Scene {
         //demon king's castle
         this.castle = this.physics.add.sprite(640,64,'castle')
         this.castle.body.setImmovable(true)
+        this.physics.add.collider(this.castle, this.player)
 
         this.children.bringToTop(this.player)
 

@@ -3,9 +3,12 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         super(scene, x, y, texture, frame)
         scene.add.existing(this)
         scene.physics.add.existing(this)
-
+        this.cut
         this.direction = 'down'
         this.playerVelocity = 200
+        this.dashVelocity = 500
+
+        this.isDashing = false
 
         this.hp = 1
 
@@ -19,6 +22,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             idle: new IdleState(),
             move: new MoveState(),
             attack: new AttackState(),
+            dash: new DashState(),
         },[scene,this])
 
     }
@@ -60,6 +64,11 @@ class IdleState extends State {
             this.stateMachine.transition('attack')
             return
         }
+
+        if(Phaser.Input.Keyboard.JustDown(KKey)) {
+            this.stateMachine.transition('dash')
+            return
+        }
     }
 }
 
@@ -74,6 +83,11 @@ class MoveState extends State {
 
         if(Phaser.Input.Keyboard.JustDown(JKey)) {
             this.stateMachine.transition('attack')
+            return
+        }
+
+        if(Phaser.Input.Keyboard.JustDown(KKey)) {
+            this.stateMachine.transition('dash')
             return
         }
 
@@ -107,6 +121,7 @@ class MoveState extends State {
 
 class AttackState extends State {
     enter(scene, player) {
+        
         player.setVelocity(0)
         player.anims.play(`swing-${player.direction}`)
 
@@ -138,11 +153,80 @@ class AttackState extends State {
         player.setVelocity(player.playerVelocity * moveDirection.x, player.playerVelocity * moveDirection.y)
         //player.anims.play(`walk-${player.direction}`, true)*/
 
-            new Cut(scene,player.x, player.y, 'cut')
+           this.cut = new Cut(scene,player.x, player.y, 'cut', player)
         
 
         player.once('animationcomplete', () => {
             this.stateMachine.transition('idle')
         })
+    }
+
+    execute(scene, player) {
+        const WKey = scene.keys.WKey
+        const AKey = scene.keys.AKey
+        const SKey = scene.keys.SKey
+        const DKey = scene.keys.DKey
+        const JKey = scene.keys.JKey
+        const KKey = scene.keys.KKey
+
+        // handle movement
+        let moveDirection = new Phaser.Math.Vector2(0, 0)
+        if(WKey.isDown) {
+            moveDirection.y = -1
+            player.direction = 'up'
+        } else if(SKey.isDown) {
+            moveDirection.y = 1
+            player.direction = 'down'
+        }
+        if(AKey.isDown) {
+            moveDirection.x = -1
+            player.direction = 'left'
+        } else if(DKey.isDown) {
+            moveDirection.x = 1
+            player.direction = 'right'
+        }
+
+        moveDirection.normalize()
+        player.setVelocity(player.playerVelocity * moveDirection.x, player.playerVelocity * moveDirection.y)
+        this.cut.update()
+        //player.anims.play(`walk-${player.direction}`, true)
+    }
+}
+
+class DashState extends State {
+    enter(scene, player) {
+        const WKey = scene.keys.WKey
+        const AKey = scene.keys.AKey
+        const SKey = scene.keys.SKey
+        const DKey = scene.keys.DKey
+        const JKey = scene.keys.JKey
+        const KKey = scene.keys.KKey
+
+        let moveDirection = new Phaser.Math.Vector2(0, 0)
+        if(WKey.isDown) {
+            moveDirection.y = -1
+            player.direction = 'up'
+        } else if(SKey.isDown) {
+            moveDirection.y = 1
+            player.direction = 'down'
+        }
+        if(AKey.isDown) {
+            moveDirection.x = -1
+            player.direction = 'left'
+        } else if(DKey.isDown) {
+            moveDirection.x = 1
+            player.direction = 'right'
+        }
+        moveDirection.normalize()
+        player.setVelocity(player.dashVelocity * moveDirection.x, player.dashVelocity * moveDirection.y)
+        player.setTint(0x00CCFF)
+        player.anims.play(`walk-${player.direction}`, true)
+        this.isDashing = true
+        scene.time.delayedCall(300, () => {
+            player.setTint(0xFFFFFF)
+            this.isDashing = false
+            this.stateMachine.transition('idle')
+        })
+            
     }
 }
