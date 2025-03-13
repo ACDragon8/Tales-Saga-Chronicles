@@ -5,6 +5,8 @@ class Load extends Phaser.Scene {
 
     preload() {
         this.load.path = './assets/'
+
+        //sprites
         this.load.spritesheet('hero', 'hero-sheet.png', {
             frameWidth: 32,
             frameHeight: 32,
@@ -17,12 +19,24 @@ class Load extends Phaser.Scene {
         this.load.image('slime', 'slime.png')
         this.load.image('bullet','bullet.png')
         this.load.image('cut','cut.png')
-        this.load.image('castle','Castle.png')
+        this.load.spritesheet('castle','Castle.png', {
+            frameWidth: 128,
+            frameHeight: 128,
+        })
+        //audio
         this.load.audio('pixel-time','1-02. Pixel Time.mp3')
     }
 
     create() {
-        //Using Scrolling State Sprites as placeholders
+        //castle opening animation
+        this.anims.create({
+            key: 'castle-open',
+            frameRate: 8,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('castle',{
+                frames: [0,1,2,3,2,1,0],
+            }),
+        })
 
         //player animations
         this.anims.create({
@@ -50,34 +64,6 @@ class Load extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('player', { start: 12, end: 15 }),
         })
 
-        /*
-        // hero animations (walking)
-        this.anims.create({
-            key: 'walk-down',
-            frameRate: 8,
-            repeat: -1,
-            frames: this.anims.generateFrameNumbers('player', { start: 0, end: 3 }),
-        })
-        this.anims.create({
-            key: 'walk-right',
-            frameRate: 8,
-            repeat: -1,
-            frames: this.anims.generateFrameNumbers('hero', { start: 4, end: 7 }),
-        })
-        this.anims.create({
-            key: 'walk-up',
-            frameRate: 8,
-            repeat: -1,
-            frames: this.anims.generateFrameNumbers('hero', { start: 8, end: 11 }),
-        })
-        this.anims.create({
-            key: 'walk-left',
-            frameRate: 8,
-            repeat: -1,
-            frames: this.anims.generateFrameNumbers('hero', { start: 12, end: 15 }),
-        })
-        */
-
         // hero animations (swinging)
         this.anims.create({
             key: 'swing-down',
@@ -104,16 +90,6 @@ class Load extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('hero', { start: 28, end: 31 }),
         })
 
-        //circular swing
-        this.anims.create({
-            key: 'circular-attack',
-            frameRate: 24,
-            repeat: 0,
-            frames: this.anims.generateFrameNumbers('hero', [16, 16, 16, 17, 18, 24, 25, 26, 21, 22,
-                 30, 29, 28, 18, 19, 19, 19])
-
-        
-        })
         this.scene.start('menuScene')
     }
 }

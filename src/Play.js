@@ -30,12 +30,29 @@ class Play extends Phaser.Scene {
 
         //demon king's castle
         this.castle = this.physics.add.sprite(640,64,'castle')
+        this.castle.opening = false
         this.castle.body.setImmovable(true)
-        this.physics.add.collider(this.castle, this.player)
+        this.physics.add.collider(this.castle, this.player, (castle, player) => {
+            if(!this.castle.opening ) {
+                this.castle.opening = true
+                player.setVisible(false)
+                castle.anims.play('castle-open')
+                castle.once('animationcomplete', () => {
+                this.castle.opening = false
+                this.scene.start('menuScene')
+                
+            player.isDashing = true
+            })
+         }
+
+        })
 
         this.children.bringToTop(this.player)
 
-        
+        // set up camera
+        this.cameras.main.setBounds(0,0,this.map.width, this.map.height)
+        this.cameras.main.startFollow(this.player, false)
+        this.physics.world.setBounds(0,0,this.map.width, this.map.height)
 
         //spawn slimes every so often
         this.slimes = this.add.group({classType: Slime, runChildUpdate: true})
@@ -76,10 +93,7 @@ class Play extends Phaser.Scene {
 
         
 
-        // set up camera
-        this.cameras.main.setBounds(0,0,this.map.width, this.map.height)
-        this.cameras.main.startFollow(this.player, false)
-        this.physics.world.setBounds(0,0,this.map.width, this.map.height)
+        
 
 
 

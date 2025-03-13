@@ -4,7 +4,7 @@ class Menu extends Phaser.Scene {
     }
 
     create() {
-        this.scene.start('playScene')
+        //this.scene.start('playScene')
     }
 
     update() {

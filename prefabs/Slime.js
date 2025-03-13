@@ -7,8 +7,8 @@ class Slime extends Phaser.Physics.Arcade.Sprite {
         //console.log('a')
 
         this.hp = 1
-        this.cd = 500
-        this.slimeVelocity = 100
+        this.cd = 250
+        this.slimeVelocity = 200
         this.isDead = false
         this.body.setSize(this.width / 2, this.height / 2)
         this.body.setCollideWorldBounds(true)
