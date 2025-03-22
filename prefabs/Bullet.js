@@ -4,7 +4,7 @@ class Bullet extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this)
         scene.physics.add.existing(this)
 
-        this.speed = 200
+        this.speed = 150
         this.lifetime = 5000
 
         this.body.setSize(this.width / 8, this.height / 8)
@@ -18,7 +18,10 @@ class Bullet extends Phaser.Physics.Arcade.Sprite {
         //on hitting the player, log a hit
         scene.physics.add.overlap(this, scene.player, (bullet, player) => {
             if (!player.isDashing) {
-                console.log('hit')
+                //console.log('hit')
+                if (!god) {
+                    player.hp -=1
+                }
                 bullet.destroy()
             }
         })

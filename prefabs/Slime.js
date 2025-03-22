@@ -7,7 +7,7 @@ class Slime extends Phaser.Physics.Arcade.Sprite {
         //console.log('a')
 
         this.hp = 1
-        this.cd = 250
+        this.cd = 500
         this.slimeVelocity = 200
         this.isDead = false
         this.body.setSize(this.width / 2, this.height / 2)
@@ -42,14 +42,14 @@ class Slime extends Phaser.Physics.Arcade.Sprite {
 //states
 class SlimeIdle extends State {
     enter(scene, slime) {
-        console.log('idle')
+        //console.log('idle')
         //randomly transitions between moving and shooting
         scene.time.delayedCall(slime.cd, () => {
             let transition = Math.random() * 2
             //console.log(transition)
             if (transition > 1 ) {
                 if(!slime.isDead) {this.stateMachine.transition('move')}
-                console.log('move')
+                //console.log('move')
                 return
             }
             else {

@@ -3,7 +3,11 @@
 /*
 Name: Hao Deng
 Game: Tales Saga Chronicles
-Inspiration: 
+Inspiration: Tales Saga Chronicles from Blue Archive
+
+Credits:
+Visuals inspired by Blue Archive
+Sound Effects from Blue Archive
 */
 
 const config = {
@@ -16,10 +20,12 @@ const config = {
     physics: {
         default: "arcade",
         arcade: {
-            debug: true
+            debug: false
         }
     },
-    scene: [ Load, Menu, Intro, Play, Castle]
+    scene: [ Load, Menu, Play, Castle, GameOver]
 }
 
 const game = new Phaser.Game(config)
+
+let god = false

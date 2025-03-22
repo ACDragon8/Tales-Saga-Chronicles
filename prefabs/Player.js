@@ -7,6 +7,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.direction = 'down'
         this.playerVelocity = 200
         this.dashVelocity = 500
+        this.offset = 16 //offset of pixels for attacks
+        this.cause = 'none'
 
         this.isDashing = false
 
@@ -30,9 +32,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     update() {
         if(this.hp > 0) {
             this.playerState.step()
-        }
-        else {
-            scene.scene.start('menu')
         }
     }
 
@@ -123,9 +122,26 @@ class AttackState extends State {
     enter(scene, player) {
         
         player.setVelocity(0)
+        scene.sound.play('swing')
         player.anims.play(`swing-${player.direction}`)
+        let offset = player.offset
+
+        if(player.direction == 'up') {
+            this.cut = new Cut(scene,player.x, player.y-offset, 'cut', player)
+            this.cut.angle = 0
+        } else if(player.direction == 'down') {
+            this.cut = new Cut(scene,player.x, player.y+offset, 'cut', player)
+            this.cut.body.setSize()
+            this.cut.angle = 180
+        } else if(player.direction == 'left') {
+            this.cut = new Cut(scene,player.x-offset, player.y, 'cut', player)
+            this.cut.angle = 270
+        } else if(player.direction == 'right') {
+            this.cut = new Cut(scene,player.x+offset, player.y, 'cut', player)
+            this.cut.angle = 90
+        }
         
-        this.cut = new Cut(scene,player.x, player.y, 'cut', player)
+        
         
 
         player.once('animationcomplete', () => {
@@ -173,6 +189,7 @@ class DashState extends State {
         const DKey = scene.keys.DKey
         const JKey = scene.keys.JKey
         const KKey = scene.keys.KKey
+        scene.sound.play('dash')
 
         let moveDirection = new Phaser.Math.Vector2(0, 0)
         if(WKey.isDown) {

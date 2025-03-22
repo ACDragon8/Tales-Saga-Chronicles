@@ -19,7 +19,10 @@ class Load extends Phaser.Scene {
         this.load.image('castleMap','CastleMap.png')
         this.load.image('slime', 'slime.png')
         this.load.image('bullet','bullet.png')
-        this.load.image('cut','cut.png')
+        this.load.spritesheet('cut','cut.png', {
+            frameWidth: 64,
+            frameHeight:32,
+        })
         this.load.image('menu', 'Menu.png')
         this.load.spritesheet('castle','Castle.png', {
             frameWidth: 128,
@@ -30,6 +33,9 @@ class Load extends Phaser.Scene {
 
         //audio
         this.load.audio('pixel-time','1-02. Pixel Time.mp3')
+        this.load.audio('win','SE_RetroSuccess_01.wav.mp3')
+        this.load.audio('swing','click.wav')
+        this.load.audio('dash','SE_Umbrella_01.wav')
     }
 
     create() {
@@ -95,6 +101,13 @@ class Load extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('player', {frames: [28,29,30,31]}),
         })
 
+        //slash animations
+        this.anims.create({
+            key: 'slash',
+            frameRate: 8,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('cut', {frames: [0,1,2,3]}),
+        })
         this.scene.start('menuScene')
     }
 }

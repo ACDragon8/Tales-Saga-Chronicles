@@ -3,6 +3,10 @@ class Castle extends Phaser.Scene {
         super('castleScene')
     }
 
+    init(data) {
+        this.player = data.player
+    }
+
     create() {
         this.keys = this.input.keyboard.createCursorKeys()
         this.keys.WKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W)

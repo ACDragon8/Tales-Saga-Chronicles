@@ -4,6 +4,8 @@ class Menu extends Phaser.Scene {
     }
 
     create() {
+        god = false
+        console.log('start using B(K) for god mode')
         //this.scene.start('playScene')
         this.add.image(0,0,'menu').setOrigin(0,0)
 
@@ -46,9 +48,25 @@ class Menu extends Phaser.Scene {
         this.keys = this.input.keyboard.createCursorKeys()
         this.keys.JKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J)
         const JKey = this.keys.JKey
+        this.keys.KKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K)
+        const KKey = this.keys.KKey
+        
 
         if(Phaser.Input.Keyboard.JustDown(JKey)) {
-            this.scene.start('playScene')
+            this.sound.play('win')
+            this.time.delayedCall(1400, () => {
+                this.scene.start('playScene')
+            })
+            
+        }
+
+        if(Phaser.Input.Keyboard.JustDown(KKey)) {
+            this.sound.play('win')
+            god = true
+            this.time.delayedCall(1400, () => {
+                this.scene.start('playScene')
+            })
+            
         }
     }
 }

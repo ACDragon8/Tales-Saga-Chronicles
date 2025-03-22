@@ -102,6 +102,9 @@ class Play extends Phaser.Scene {
 
     update() {
         this.player.update()
+        if (this.player.hp <= 0) {
+            this.scene.start('gameOver',{cause: this.cause})
+        }
 
     }
 }
