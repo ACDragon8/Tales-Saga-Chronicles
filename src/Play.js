@@ -67,6 +67,7 @@ class Play extends Phaser.Scene {
        
         this.spawn = this.time.addEvent({delay: this.spawnRate,
             callback: () => {
+                //spawn slimes close to player when not at the maximum
                 if (this.slimeCount < this.slimeMax) {
                     let signX = Math.random()
                     if (signX > 0.5) {
@@ -104,6 +105,7 @@ class Play extends Phaser.Scene {
 
     update() {
         this.player.update()
+        //game over if takes damage below 0 hp
         if (this.player.hp <= 0) {
             if (!this.transition) {
                 this.player.playerState.transition('idle')

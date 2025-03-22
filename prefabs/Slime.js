@@ -26,11 +26,8 @@ class Slime extends Phaser.Physics.Arcade.Sprite {
             this.body.setCollideWorldBounds(false)
             this.x = -1000
             this.y = -1000
-            this.scene.slimes.remove(this)
             this.isDead = true
             this.enemyState.transition('dead')
-            this.scene.slimeCount -= 1
-            
 
         }
         else {
@@ -77,7 +74,7 @@ class SlimeMove extends State {
 class SlimeAttack extends State {
     enter(scene, slime) {
         //shoots once and returns to idle
-        new Bullet(scene, slime.x, slime.y, 'bullet')
+        new Bullet(scene, slime.x, slime.y, 'bullet',0,'slime')
          scene.time.delayedCall(slime.cd, () => {
             //slime.setVelocity(0)
             if(!slime.isDead) {this.stateMachine.transition('idle')}

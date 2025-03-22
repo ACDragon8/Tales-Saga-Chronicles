@@ -30,12 +30,19 @@ class Load extends Phaser.Scene {
         })
         this.load.image('wall','wall.png')
 
+        this.load.spritesheet('demon','DemonKing.png', {
+            frameWidth: 64,
+            frameHeight:64
+        })
+
         //audio
         this.load.audio('pixel-time','1-02. Pixel Time.mp3')
         this.load.audio('win','SE_RetroSuccess_01.wav.mp3')
         this.load.audio('swing','click.wav')
         this.load.audio('dash','SE_Umbrella_01.wav')
         this.load.audio('lose','SE_RetroOver_01.wav.mp3')
+        this.load.audio('bossmusic','Theme_24_8bit.ogg.mp3')
+        this.load.audio('creditsmusic','Theme_152_Title.ogg.mp3')
 
     }
 
@@ -109,6 +116,23 @@ class Load extends Phaser.Scene {
             repeat: 0,
             frames: this.anims.generateFrameNumbers('cut', {frames: [0,1,2,3]}),
         })
+
+        //demon king animations
+        //slash animations
+        this.anims.create({
+            key: 'demon-idle',
+            frameRate: 8,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('demon', {frames: [0]}),
+        })
+
+        this.anims.create({
+            key: 'demon-shoot',
+            frameRate: 4,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('demon', {frames: [0,1,1,0]}),
+        })
+
         this.scene.start('menuScene')
     }
 }

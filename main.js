@@ -8,6 +8,9 @@ Inspiration: Tales Saga Chronicles from Blue Archive
 Credits:
 Visuals inspired by Blue Archive
 Sound Effects from Blue Archive
+
+Major components:
+physics, camera, animation manager, text objects, timers
 */
 
 const config = {
@@ -23,7 +26,7 @@ const config = {
             debug: false
         }
     },
-    scene: [ Load, Menu, Play, Castle, GameOver]
+    scene: [ Load, Menu, Play, Castle, GameOver, Credits]
 }
 
 const game = new Phaser.Game(config)

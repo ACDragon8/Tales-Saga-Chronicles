@@ -9,7 +9,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.dashVelocity = 500
         this.offset = 16 //offset of pixels for attacks
         this.cause = 'none' // cause of death
-
         this.isDashing = false
 
         this.hp = 1
@@ -125,7 +124,7 @@ class AttackState extends State {
         scene.sound.play('swing')
         player.anims.play(`swing-${player.direction}`)
         let offset = player.offset
-
+        //choose direction
         if(player.direction == 'up') {
             this.cut = new Cut(scene,player.x, player.y-offset, 'cut', player)
             this.cut.angle = 0
@@ -157,7 +156,7 @@ class AttackState extends State {
         const JKey = scene.keys.JKey
         const KKey = scene.keys.KKey
 
-        // handle movement
+        // handle movement while attacking
         let moveDirection = new Phaser.Math.Vector2(0, 0)
         if(WKey.isDown) {
             moveDirection.y = -1

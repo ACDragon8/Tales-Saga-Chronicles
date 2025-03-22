@@ -4,6 +4,7 @@ class Menu extends Phaser.Scene {
     }
 
     create() {
+        this.sound.stopAll()
         god = false
         console.log('start using B(K) for god mode')
         //this.scene.start('playScene')

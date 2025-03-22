@@ -1,11 +1,13 @@
 class Bullet extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y, texture, frame) {
-        super(scene, x, y, texture, frame)
+    constructor(scene, x, y, texture, frame,cause) {
+        super(scene, x, y, texture, frame, cause)
         scene.add.existing(this)
         scene.physics.add.existing(this)
         scene.bullets.add(this)
         this.speed = 150
         this.lifetime = 5000
+
+        this.cause = cause //who caused the death
 
         this.body.setSize(this.width / 8, this.height / 8)
         this.body.setBounce(0)
@@ -19,14 +21,12 @@ class Bullet extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.overlap(this, scene.player, (bullet, player) => {
             //miss if player is dashing
             if (!player.isDashing) {
-                //console.log('hit')
                 if (!god) {
                     player.hp -=1
+                    player.cause = cause
                 }
-                player.cause = 'slime'
             }
             else {
-                //console.log('dodge')
             }
             bullet.destroy()
         })
