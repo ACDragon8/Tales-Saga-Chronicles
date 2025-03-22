@@ -8,6 +8,7 @@ class Castle extends Phaser.Scene {
     }
 
     create() {
+        //setup
         this.keys = this.input.keyboard.createCursorKeys()
         this.keys.WKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W)
         this.keys.AKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A)
@@ -26,6 +27,15 @@ class Castle extends Phaser.Scene {
         this.physics.world.setBounds(0,0,this.map.width, this.map.height)
 
         this.sound.stopAll()
+
+
+        //create walls for corridor
+        this.wall_1 = this.physics.add.sprite(0,17*32,'wall').setOrigin(0,0)
+        this.wall_2 = this.physics.add.sprite(32*14,17*32,'wall').setOrigin(0,0)
+        this.wall_1.body.setImmovable(true)
+        this.wall_2.body.setImmovable(true)
+        this.physics.add.collider(this.player,this.wall_1)
+        this.physics.add.collider(this.player,this.wall_2)
     }
 
     update() {

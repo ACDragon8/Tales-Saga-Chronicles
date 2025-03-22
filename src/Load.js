@@ -28,8 +28,7 @@ class Load extends Phaser.Scene {
             frameWidth: 128,
             frameHeight: 128,
         })
-
-        this.load.bitmapFont('dogica', 'dogica/gem.png', 'font/gem.xml')
+        this.load.image('wall','wall.png')
 
         //audio
         this.load.audio('pixel-time','1-02. Pixel Time.mp3')

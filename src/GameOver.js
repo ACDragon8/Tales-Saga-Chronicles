@@ -11,32 +11,33 @@ class GameOver extends Phaser.Scene {
             fontFamily: 'Courier',
             fontSize: '28px',
             color: '#FF1500',
-            align: 'left',
+            align: 'center',
             padding: {
               top: 5,
               bottom: 5,
             },
         }
-        this.title = this.add.text(100,25,"Game Over", titleConfig)
+        this.title = this.add.text(100,50,"Game Over", titleConfig)
 
         let startConfig = {
             fontFamily: 'Courier',
             fontSize: '14px',
             color: '#FFFFFF',
-            align: 'left',
+            align: 'center',
             padding: {
               top: 5,
               bottom: 5,
             },
         }
 
+        //dialog
         console.log(this.cause)
         if (this.cause == 'none') {
-            this.add.text(50,100,"How did you even get here???")
+            this.add.text(50,100,"How did you even get here???",startConfig)
         } else if (this.cause == 'slime') {
-            this.add.text(25,100,"Puny Jelly: You should know better \n than to bring a sword to a gun fight. Hmph!")
+            this.add.text(25,100,"Puny Jelly: You should know better \nthan to bring a sword to a gun \nfight. Hmph!",startConfig)
         } else if (this.cause == 'demon') {
-            this.add.text(25,100,"Demon King: Know your place, foolish human!")
+            this.add.text(25,100,"Demon King: Know your place, \nfoolish human!",startConfig)
         } 
 
         this.returnText = this.add.text(50,200,"Press A to return to the Main Menu", startConfig)
@@ -50,7 +51,7 @@ class GameOver extends Phaser.Scene {
         this.keys.KKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K)
         const KKey = this.keys.KKey
         
-
+        //transition to menu
         if(Phaser.Input.Keyboard.JustDown(JKey)) {
             //this.sound.play('win')
             this.time.delayedCall(100, () => {

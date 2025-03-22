@@ -16,7 +16,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.body.setSize(this.width / 2, this.height / 2)
         this.body.setCollideWorldBounds(true)
-        this.body.setImmovable(true)
+        this.body.setImmovable(false)
         
 
 
@@ -183,6 +183,7 @@ class AttackState extends State {
 
 class DashState extends State {
     enter(scene, player) {
+        this.isDashing = true
         const WKey = scene.keys.WKey
         const AKey = scene.keys.AKey
         const SKey = scene.keys.SKey
@@ -210,7 +211,6 @@ class DashState extends State {
         player.setVelocity(player.dashVelocity * moveDirection.x, player.dashVelocity * moveDirection.y)
         player.setTint(0x00CCFF)
         player.anims.play(`swing-${player.direction}`, true)
-        this.isDashing = true
         scene.time.delayedCall(300, () => {
             player.setTint(0xFFFFFF)
             this.isDashing = false

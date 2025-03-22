@@ -58,6 +58,7 @@ class Play extends Phaser.Scene {
 
         //spawn slimes every so often
         this.slimes = this.add.group({classType: Slime, runChildUpdate: true})
+        this.bullets = this.add.group({classType: Bullet})
         this.slimeMax = 2
         this.slimeCount = 0
         this.spawnRate = 1000

@@ -14,10 +14,18 @@ class Cut extends Phaser.Physics.Arcade.Sprite {
         this.anims.play('slash')
         this.lifetime = 400
         this.body.setImmovable(true)
+
+        //kill slimes on contact
         scene.physics.add.collider(this,scene.slimes, (cut, slime) => {
             slime.hp -= 1
             //console.log('slime damage')
             //console.log(slime.hp) 
+        })
+
+        //kill bullets on contact
+        scene.physics.add.collider(this,scene.bullets, (cut, bullet) => {
+            bullet.destroy()
+            //console.log('bullet slice') 
         })
 
         //exist temporarily
