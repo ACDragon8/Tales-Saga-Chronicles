@@ -192,7 +192,7 @@ class DashState extends State {
         moveDirection.normalize()
         player.setVelocity(player.dashVelocity * moveDirection.x, player.dashVelocity * moveDirection.y)
         player.setTint(0x00CCFF)
-        player.anims.play(`walk-${player.direction}`, true)
+        player.anims.play(`swing-${player.direction}`, true)
         this.isDashing = true
         scene.time.delayedCall(300, () => {
             player.setTint(0xFFFFFF)

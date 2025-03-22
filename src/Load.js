@@ -20,10 +20,14 @@ class Load extends Phaser.Scene {
         this.load.image('slime', 'slime.png')
         this.load.image('bullet','bullet.png')
         this.load.image('cut','cut.png')
+        this.load.image('menu', 'Menu.png')
         this.load.spritesheet('castle','Castle.png', {
             frameWidth: 128,
             frameHeight: 128,
         })
+
+        this.load.bitmapFont('dogica', 'dogica/gem.png', 'font/gem.xml')
+
         //audio
         this.load.audio('pixel-time','1-02. Pixel Time.mp3')
     }
@@ -65,30 +69,30 @@ class Load extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('player', { start: 12, end: 15 }),
         })
 
-        // hero animations (swinging)
+        //player attack animations
         this.anims.create({
-            key: 'swing-down',
+            key: 'swing-right',
             frameRate: 8,
             repeat: 0,
-            frames: this.anims.generateFrameNumbers('hero', { start: 16, end: 19 }),
+            frames: this.anims.generateFrameNumbers('player', {frames: [16,17,18,19]}),
         })
         this.anims.create({
             key: 'swing-up',
             frameRate: 8,
             repeat: 0,
-            frames: this.anims.generateFrameNumbers('hero', { start: 20, end: 23 }),
+            frames: this.anims.generateFrameNumbers('player', {frames:[20,21,22,23]}),
         })
         this.anims.create({
-            key: 'swing-right',
+            key: 'swing-down',
             frameRate: 8,
             repeat: 0,
-            frames: this.anims.generateFrameNumbers('hero', { start: 24, end: 27 }),
+            frames: this.anims.generateFrameNumbers('player', {frames: [24,25,26,27]}),
         })
         this.anims.create({
             key: 'swing-left',
             frameRate: 8,
             repeat: 0,
-            frames: this.anims.generateFrameNumbers('hero', { start: 28, end: 31 }),
+            frames: this.anims.generateFrameNumbers('player', {frames: [28,29,30,31]}),
         })
 
         this.scene.start('menuScene')
