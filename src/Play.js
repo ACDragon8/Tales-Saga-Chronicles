@@ -12,6 +12,7 @@ class Play extends Phaser.Scene {
         this.sound.play('pixel-time', {
             loop: true
         })
+        this.transition = false
 
         //keyboard inputs
         this.keys = this.input.keyboard.createCursorKeys()
@@ -103,7 +104,17 @@ class Play extends Phaser.Scene {
     update() {
         this.player.update()
         if (this.player.hp <= 0) {
-            this.scene.start('gameOver',{cause: this.cause})
+            if (!this.transition) {
+                this.player.playerState.transition('idle')
+                this.transition = true
+                this.player.setVisible(false)
+                this.cameras.main.stopFollow()
+                this.sound.stopAll()    
+                this.sound.play('lose')
+                this.time.delayedCall(2000, () => {
+                    this.scene.start('gameOver',{cause: this.cause})
+                })
+            }
         }
 
     }

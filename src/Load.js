@@ -36,6 +36,8 @@ class Load extends Phaser.Scene {
         this.load.audio('win','SE_RetroSuccess_01.wav.mp3')
         this.load.audio('swing','click.wav')
         this.load.audio('dash','SE_Umbrella_01.wav')
+        this.load.audio('lose','SE_RetroOver_01.wav.mp3')
+
     }
 
     create() {

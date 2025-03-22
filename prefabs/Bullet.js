@@ -22,6 +22,7 @@ class Bullet extends Phaser.Physics.Arcade.Sprite {
                 if (!god) {
                     player.hp -=1
                 }
+                player.cause = 'slime'
                 bullet.destroy()
             }
         })

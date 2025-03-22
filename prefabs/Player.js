@@ -3,12 +3,12 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         super(scene, x, y, texture, frame)
         scene.add.existing(this)
         scene.physics.add.existing(this)
-        this.cut
+        this.cut // attack object
         this.direction = 'down'
         this.playerVelocity = 200
         this.dashVelocity = 500
         this.offset = 16 //offset of pixels for attacks
-        this.cause = 'none'
+        this.cause = 'none' // cause of death
 
         this.isDashing = false
 
