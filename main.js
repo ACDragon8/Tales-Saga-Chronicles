@@ -1,5 +1,11 @@
 'use strict'
 
+/*
+Name: Hao Deng
+Game: Tales Saga Chronicles
+Inspiration: 
+*/
+
 const config = {
     parent: 'phaser-game',  // for info text
     type: Phaser.WEBGL,     // for tinting
@@ -13,7 +19,7 @@ const config = {
             debug: true
         }
     },
-    scene: [ Load, Menu, Play, Castle]
+    scene: [ Load, Menu, Intro, Play, Castle]
 }
 
 const game = new Phaser.Game(config)

@@ -1,0 +1,9 @@
+[
+    [
+        {
+            "speaker":"test",
+            "dialog": "In the year 2345",
+            "newSpeaker": true,
+        }
+    ]
+]

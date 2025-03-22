@@ -16,6 +16,7 @@ class Load extends Phaser.Scene {
             frameHeight: 32,
         })
         this.load.image('map', 'map.png')
+        this.load.image('castleMap','CastleMap.png')
         this.load.image('slime', 'slime.png')
         this.load.image('bullet','bullet.png')
         this.load.image('cut','cut.png')

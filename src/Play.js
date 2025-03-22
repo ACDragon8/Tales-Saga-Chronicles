@@ -8,7 +8,7 @@ class Play extends Phaser.Scene {
     }
 
     create() {
-
+        this.sound.stopAll()
         this.sound.play('pixel-time', {
             loop: true
         })
@@ -32,6 +32,7 @@ class Play extends Phaser.Scene {
         this.castle = this.physics.add.sprite(640,64,'castle')
         this.castle.opening = false
         this.castle.body.setImmovable(true)
+        this.castle.body.setSize(this.width, this.height / 2 )
         this.physics.add.collider(this.castle, this.player, (castle, player) => {
             if(!this.castle.opening ) {
                 this.castle.opening = true
@@ -39,7 +40,7 @@ class Play extends Phaser.Scene {
                 castle.anims.play('castle-open')
                 castle.once('animationcomplete', () => {
                 this.castle.opening = false
-                this.scene.start('menuScene')
+                this.scene.start('castleScene')
                 
             player.isDashing = true
             })

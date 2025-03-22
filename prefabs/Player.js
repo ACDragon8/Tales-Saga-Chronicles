@@ -124,36 +124,8 @@ class AttackState extends State {
         
         player.setVelocity(0)
         player.anims.play(`swing-${player.direction}`)
-
-        /*const WKey = scene.keys.WKey
-        const AKey = scene.keys.AKey
-        const SKey = scene.keys.SKey
-        const DKey = scene.keys.DKey
-        const JKey = scene.keys.JKey
-        const KKey = scene.keys.KKey
-
-        // handle movement
-        let moveDirection = new Phaser.Math.Vector2(0, 0)
-        if(WKey.isDown) {
-            moveDirection.y = -1
-            player.direction = 'up'
-        } else if(SKey.isDown) {
-            moveDirection.y = 1
-            player.direction = 'down'
-        }
-        if(AKey.isDown) {
-            moveDirection.x = -1
-            player.direction = 'left'
-        } else if(DKey.isDown) {
-            moveDirection.x = 1
-            player.direction = 'right'
-        }
-
-        moveDirection.normalize()
-        player.setVelocity(player.playerVelocity * moveDirection.x, player.playerVelocity * moveDirection.y)
-        //player.anims.play(`walk-${player.direction}`, true)*/
-
-           this.cut = new Cut(scene,player.x, player.y, 'cut', player)
+        
+        this.cut = new Cut(scene,player.x, player.y, 'cut', player)
         
 
         player.once('animationcomplete', () => {
