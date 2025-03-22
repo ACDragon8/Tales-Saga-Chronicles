@@ -112,7 +112,7 @@ class Play extends Phaser.Scene {
                 this.sound.stopAll()    
                 this.sound.play('lose')
                 this.time.delayedCall(2000, () => {
-                    this.scene.start('gameOver',{cause: this.cause})
+                    this.scene.start('gameOver',{cause: this.player.cause})
                 })
             }
         }

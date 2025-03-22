@@ -8,20 +8,17 @@ class Cut extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this)
 
         if (this.direction == 'left' || this.direction == 'right') {
-            console.log('turn')
+            //console.log('turn')
             this.body.setSize(this.height, this.width)
         }
         this.anims.play('slash')
         this.lifetime = 400
-        //this.active = true
         this.body.setImmovable(true)
-        //for (let i = 0; i < scene.slimes.; i++) {
-            scene.physics.add.collider(this,scene.slimes, (cut, slime) => {
-                slime.hp -= 1
-                //console.log('slime damage')
-                //console.log(slime.hp) 
-            })
-        //}
+        scene.physics.add.collider(this,scene.slimes, (cut, slime) => {
+            slime.hp -= 1
+            //console.log('slime damage')
+            //console.log(slime.hp) 
+        })
 
         //exist temporarily
         scene.time.delayedCall(this.lifetime, () => {

@@ -21,7 +21,7 @@ class GameOver extends Phaser.Scene {
 
         let startConfig = {
             fontFamily: 'Courier',
-            fontSize: '16px',
+            fontSize: '14px',
             color: '#FFFFFF',
             align: 'left',
             padding: {
@@ -30,14 +30,34 @@ class GameOver extends Phaser.Scene {
             },
         }
 
+        console.log(this.cause)
         if (this.cause == 'none') {
-            this.add.text("How did you even get here???")
+            this.add.text(50,100,"How did you even get here???")
         } else if (this.cause == 'slime') {
-            this.add.text("How did you even get here???")
+            this.add.text(25,100,"Puny Jelly: You should know better \n than to bring a sword to a gun fight. Hmph!")
+        } else if (this.cause == 'demon') {
+            this.add.text(25,100,"Demon King: Know your place, foolish human!")
+        } 
+
+        this.returnText = this.add.text(50,200,"Press A to return to the Main Menu", startConfig)
+
+    }
+    
+    update() {
+        this.keys = this.input.keyboard.createCursorKeys()
+        this.keys.JKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J)
+        const JKey = this.keys.JKey
+        this.keys.KKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K)
+        const KKey = this.keys.KKey
+        
+
+        if(Phaser.Input.Keyboard.JustDown(JKey)) {
+            //this.sound.play('win')
+            this.time.delayedCall(100, () => {
+                this.scene.start('menuScene')
+            })
+            
         }
-
-        this.returnText = this.add.text(25,200,"Press A to return to the Main Menu", startConfig)
-
     }
 
     
