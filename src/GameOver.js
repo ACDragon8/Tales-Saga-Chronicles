@@ -31,7 +31,6 @@ class GameOver extends Phaser.Scene {
         }
 
         //dialog
-        console.log(this.cause)
         if (this.cause == 'none') {
             this.add.text(50,100,"How did you even get here???",startConfig)
         } else if (this.cause == 'slime') {

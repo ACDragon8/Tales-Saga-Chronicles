@@ -88,7 +88,6 @@ class DemonAttack extends State {
 
 class DemonDead extends State {
     enter(scene, demon) {
-        //console.log('demon is ddeadd')
         demon.isDead = true
     }
 }
@@ -99,7 +98,6 @@ class DemonDamage extends State {
         let moveDirection = new Phaser.Math.Vector2( - scene.player.x + demon.x , - scene.player.y +demon.y).normalize()
         demon.setVelocity(demon.kb * moveDirection.x, demon.kb * moveDirection.y)
         demon.setTint(0xAAAA00)
-        //console.log(demon.hp)
         scene.time.delayedCall(401, () => {
             if(demon.hp > 0) {
                 demon.setTint(0xFFFFFF)

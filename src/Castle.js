@@ -56,7 +56,6 @@ class Castle extends Phaser.Scene {
                     }
                     
                 }) 
-                //this.healthbar = this.add.rectangle(this.player.x - 50, this.player.y + 100, 100,32, 0xFFFFFF)
             }
         })
     }

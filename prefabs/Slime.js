@@ -87,6 +87,7 @@ class SlimeAttack extends State {
 class SlimeDead extends State {
     enter(scene, slime) {
         scene.time.delayedCall(5000, () => {
+            scene.slimeCount--
             slime.destroy()
         })
         return
