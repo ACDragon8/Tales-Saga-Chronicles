@@ -10,6 +10,7 @@ class Slime extends Phaser.Physics.Arcade.Sprite {
         this.cd = 500
         this.slimeVelocity = 200
         this.isDead = false
+        this.deadLock = false
         this.body.setSize(this.width / 2, this.height / 2)
         this.body.setCollideWorldBounds(true)
 
@@ -86,9 +87,13 @@ class SlimeAttack extends State {
 
 class SlimeDead extends State {
     enter(scene, slime) {
+        
+        if(!this.deadLock)
+        scene.slimeCount--
+        this.deadLock = true
         scene.time.delayedCall(5000, () => {
-            scene.slimeCount--
             slime.destroy()
+            this.deadLock = false
         })
         return
     }
